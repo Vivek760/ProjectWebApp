@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <script defer>
+        function catlist(data) {
+
+        data = JSON.parse({{ data | tojson }})
+
+
+        var myDiv = document.getElementById("Categories");
+
+        var iterator = data.values();
+
+
+        for (let elements of iterator) {
+            var myDiv = document.getElementById("Categories");
+            var button = document.createElement('BUTTON');
+           
+            button.id = elements;
+            button.onclick = function () { alert("This object's ID attribute is set to \"" + elements + "\".");}
+            var text = document.createTextNode(elements);
+            button.appendChild(text);
+            myDiv.appendChild(button);
+
+        }
+        }
+        catlist({{ data| safe }})
+
+
+
+
+
+
+    </script>
+</head>
+
+
+<body>
+    <h1>Smart AD</h1>
+    <button type="button" onclick="catlist()">Get your Categories</button>
+    <hr>
+    <div id="Categories"></div>
+</body>
+
+</html>
