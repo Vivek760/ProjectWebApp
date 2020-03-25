@@ -1,11 +1,11 @@
 from flask import Flask, redirect, url_for,render_template, request
 import os
 import json
-from flask_jsglue import JSGlue
+# from flask_jsglue import JSGlue
 from werkzeug import secure_filename
 
 app = Flask(__name__)
-jsglue = JSGlue(app)
+# jsglue = JSGlue(app)
 
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -32,7 +32,7 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return  "Sucess!"
+            return  "Success!"
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -44,33 +44,32 @@ def upload_file():
     ''' 
 @app.route('/final')
 def hello_admin():
-    os.system("python dummy.py")
+    os.system("python3 dummy.py")
     f = open("ImageNames.txt","r")
     st = f.read()
     data = st.split()
 
     return render_template("ListCategories.html",data=json.dumps(data))
-   
     f.close()
 
 #Read the output Images from the Output Folder
-@app.route('/output')
-def hello_guest():
-    st = ""
-    #Read the names of the Images.
-    f = open("ImageNames.txt","r")
-    st = f.read()
-    return 'files are: %s' % st
-    f.close()
+# @app.route('/output')
+# def hello_guest():
+#     st = ""
+#     #Read the names of the Images.
+#     f = open("ImageNames.txt","r")
+#     st = f.read()
+#     return 'files are: %s' % st
+#     f.close()
 
 @app.route('/reqjson',methods=['POST'])
 def pass_val():
-    name=request.get('canvas_data')
-    print('name',name)
-    f = open("reqd_images.txt","w")
+    name=request.form['canvas_data']
+    print(name)
+    f = open("./reqd_images.txt","w")
     f.write(name)
     f.close()
-    return "success"
+    return 'Success'
 
 
 
