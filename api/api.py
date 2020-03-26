@@ -44,7 +44,7 @@ def upload_file():
     ''' 
 @app.route('/final')
 def hello_admin():
-    os.system("python3 dummy.py")
+    os.system("python dummy.py")
     f = open("labels.txt","r")
     st = f.read()
     data = st.split()

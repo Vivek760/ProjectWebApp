@@ -1,7 +1,7 @@
 from PIL import Image
 import os
 
-fi = open("ImageNames.txt","w")
+fi = open("labels.txt","w")
 
 inpath = '../api/uploads'
 outpath = '../api/output/'
